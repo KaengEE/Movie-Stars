@@ -20,7 +20,7 @@ export default function GoogleButton() {
   return (
     <div onClick={onClick} className="login-button">
       <img src="/github-logo.svg"></img>
-      <span>GitHub로 시작하기</span>
+      <span>Continue with GitHub</span>
     </div>
   );
 }

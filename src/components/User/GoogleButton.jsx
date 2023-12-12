@@ -20,7 +20,7 @@ export default function GoogleButton() {
   return (
     <div onClick={onClick} className="login-button">
       <img src="/google_logo.svg"></img>
-      <span>Google로 시작하기</span>
+      <span>Continue with Google</span>
     </div>
   );
 }
