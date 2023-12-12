@@ -73,11 +73,12 @@ h4 {
 }
 
 button {
-  background-color: #777;
-}
-
-.btn button:hover {
   background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border-style: none;
+  cursor: pointer;
 }
 
 /* 평점 박스 */
@@ -92,4 +93,5 @@ button {
   padding: 20px;
   max-width: 800px;
   width: 100%;
+  height: auto;
 }

@@ -1,10 +1,15 @@
 .star_rate {
-  font-size: 10px; /* Adjust the size as needed */
-  margin-top: 10px; /* Adjust the spacing as needed */
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .comment_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.comment_form p {
+  margin-bottom: 10px;
 }

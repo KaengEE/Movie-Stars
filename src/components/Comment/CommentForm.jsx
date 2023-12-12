@@ -36,10 +36,10 @@ export default function CommentForm({ movieId }) {
         stars: stars,
         userProfile: user.photoURL || "",
       });
-      console.log(doc);
+      //console.log(doc);
       //초기화
-      // setComment("");
-      // setStars(0);
+      setComment("");
+      setStars(0);
     } catch (e) {
       console.log(e);
     } finally {
@@ -49,21 +49,22 @@ export default function CommentForm({ movieId }) {
 
   return (
     <form className="comment_form" onSubmit={onSubmit}>
+      <p>당신의 평가를 남겨주세요!</p>
       <input
         onChange={onChange}
         type="text"
         value={comment}
         placeholder="평가 남기기"
       />
-      <div>
+      <div className="star_rate">
         {/* 별점 */}
         <StarRatings
           rating={stars}
           starRatedColor="orange"
           changeRating={starChange}
           numberOfStars={5}
+          starDimension="25px" //별 크기
           name="rating"
-          className="star_rate"
         />
       </div>
       <input

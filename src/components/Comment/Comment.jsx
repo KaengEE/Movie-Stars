@@ -1,4 +1,11 @@
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import "./Comment.css";
@@ -12,7 +19,8 @@ export default function Comment({ movieId }) {
     const q = query(
       collection(db, "comment"),
       where("movieId", "==", movieId), //movieId가 같을때
-      orderBy("createdAt", "desc") //최신순
+      orderBy("createdAt", "desc"), //최신순
+      limit(5) //제한
     );
     const snapshot = await getDocs(q);
     const comments = snapshot.docs.map((doc) => {

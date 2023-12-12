@@ -69,15 +69,18 @@ export default function SingleMovie() {
           </div>
         </div>
       </div>
-      <div className="comment_box">
-        <p>무비스타들의 평가</p>
-        {/* comment 리스트 */}
-        <div className="movie_detail">
-          <Comment movieId={movieId} />
-        </div>
-        {/* 나도작성하기 */}
-        <div>
-          <CommentForm movieId={movieId} />
+      {/* 평가박스 */}
+      <div className="movie_detail">
+        <div className="comment_box">
+          <p>무비스타들의 평가</p>
+          {/* comment 리스트 */}
+          <div className="movie_detail">
+            <Comment movieId={movieId} />
+          </div>
+          {/* 나도작성하기 */}
+          <div>
+            <CommentForm movieId={movieId} />
+          </div>
         </div>
       </div>
     </>
