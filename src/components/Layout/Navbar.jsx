@@ -1,7 +1,19 @@
+import { auth } from "../../firebase";
 import "./Navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
+  //로그아웃
+  const onLogOut = async () => {
+    const ok = confirm("로그아웃 하시겠습니까?");
+    if (ok) {
+      //로그아웃
+      await auth.signOut();
+      navigate("/login");
+    }
+  };
   return (
     <nav className="navbar">
       <Link to="/" className="link">
@@ -18,7 +30,9 @@ export default function Navbar() {
 
       <div className="user_links">
         <Link to="/login">로그인</Link>
-        <Link to="/logout">로그아웃</Link>
+        <Link onClick={onLogOut} to="/logout">
+          로그아웃
+        </Link>
         <Link to="/join">회원가입</Link>
         <Link to="/mypage">마이페이지</Link>
       </div>
