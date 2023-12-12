@@ -20,7 +20,7 @@ export default function Comment({ movieId }) {
       collection(db, "comment"),
       where("movieId", "==", movieId), //movieId가 같을때
       orderBy("createdAt", "desc"), //최신순
-      limit(5) //제한
+      limit(4) //제한
     );
     const snapshot = await getDocs(q);
     const comments = snapshot.docs.map((doc) => {
@@ -41,9 +41,13 @@ export default function Comment({ movieId }) {
     fetchComments();
   }, []);
 
+  //console.log(comments);
+
   return (
     <div className="comment_card">
-      {comments == null ? (
+      {comments.length === 0 ? (
+        <span>평가가 아직 없습니다.</span>
+      ) : (
         comments.map((comment, index) => (
           <div key={index}>
             <p>작성자: {comment.username}</p>
@@ -53,8 +57,6 @@ export default function Comment({ movieId }) {
             <p>작성일: {comment.createdAt}</p>
           </div>
         ))
-      ) : (
-        <span>평가가 아직 없습니다.</span>
       )}
     </div>
   );
