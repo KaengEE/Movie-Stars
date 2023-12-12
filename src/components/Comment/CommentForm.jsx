@@ -3,11 +3,13 @@ import "./CommentForm.css";
 import StarRatings from "react-star-ratings";
 import { auth, db } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 export default function CommentForm({ movieId }) {
   const [isLoading, setLoading] = useState(false);
   const [comment, setComment] = useState(""); //평가
   const [stars, setStars] = useState(0); //별점
+  const navigate = useNavigate(); //페이지 이동
 
   //작성 메서드
   const onChange = (e) => {
@@ -23,6 +25,12 @@ export default function CommentForm({ movieId }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const user = auth.currentUser;
+
+    if (!user) {
+      alert("로그인을 해주세요!");
+      navigate("/login"); //로그인으로 이동
+    }
+
     if (!user || isLoading || comment === "" || stars === 0) return;
     try {
       setLoading(true);
