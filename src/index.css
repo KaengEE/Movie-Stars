@@ -1,8 +1,8 @@
 /* 폰트 */
 @font-face {
-  font-family: "MBC1961GulimM";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2")
-    format("woff2");
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  font-family: "MBC1961GulimM", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
 }
 
 /* 공통적으로 자주쓰는 세로가운데정렬 */

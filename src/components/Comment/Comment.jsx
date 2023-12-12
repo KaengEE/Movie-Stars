@@ -15,6 +15,8 @@ export default function Comment({ movieId }) {
   const [comments, setComments] = useState([]);
   //로딩
   const [loading, setLoading] = useState(true);
+  //평가개수
+  const [viewComments, setViewComments] = useState(4); // 기본값 4
 
   // 실시간 반영
   useEffect(() => {
@@ -26,7 +28,7 @@ export default function Comment({ movieId }) {
         collection(db, "comment"),
         where("movieId", "==", movieId),
         orderBy("createdAt", "desc"),
-        limit(4)
+        limit(viewComments)
       );
 
       //실시간 업데이트
@@ -48,9 +50,14 @@ export default function Comment({ movieId }) {
     };
     fetchComments();
     return () => unsub();
-  }, []);
+  }, [viewComments]);
 
   //console.log(comments);
+
+  const showMore = () => {
+    //limit 에 +4 하기
+    setViewComments((prev) => prev + 4);
+  };
 
   return (
     <div className="comment_card">
@@ -58,15 +65,20 @@ export default function Comment({ movieId }) {
         <span>평가가 아직 없습니다.</span>
       ) : (
         comments.map((comment, index) => (
-          <div key={index}>
-            <p>작성자: {comment.username}</p>
+          <div key={index} className="comment_text">
+            <div className="comment_user">
+              <span>작성자: {comment.username}</span>
+              <img src={comment.userProfile} alt="userProfile" />
+            </div>
             <p>{comment.comment}</p>
-            <p>별점: {comment.stars}</p>
-            <img src={comment.userProfile} alt="userProfile" />
-            <p>작성일: {comment.createdAt}</p>
+            <div className="text_star">
+              <span>별점: {comment.stars}</span>
+              <span>작성일: {comment.createdAt}</span>
+            </div>
           </div>
         ))
       )}
+      <button onClick={showMore}>더보기</button>
     </div>
   );
 }

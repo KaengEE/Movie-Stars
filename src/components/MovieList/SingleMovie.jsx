@@ -74,7 +74,7 @@ export default function SingleMovie() {
         <div className="comment_box">
           <p>무비스타들의 평가</p>
           {/* comment 리스트 */}
-          <div className="movie_detail">
+          <div>
             <Comment movieId={movieId} />
           </div>
           {/* 나도작성하기 */}
