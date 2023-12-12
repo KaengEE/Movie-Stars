@@ -55,14 +55,17 @@ export default function CommentForm({ movieId }) {
         value={comment}
         placeholder="평가 남기기"
       />
-      {/* 별점 */}
-      <StarRatings
-        rating={stars}
-        starRatedColor="orange"
-        changeRating={starChange}
-        numberOfStars={5}
-        name="rating"
-      />
+      <div>
+        {/* 별점 */}
+        <StarRatings
+          rating={stars}
+          starRatedColor="orange"
+          changeRating={starChange}
+          numberOfStars={5}
+          name="rating"
+          className="star_rate"
+        />
+      </div>
       <input
         onChange={onChange}
         type="submit"
