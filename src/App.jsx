@@ -4,6 +4,8 @@ import Navbar from "./components/Layout/Navbar";
 import MovieList from "./components/MovieList/MovieList";
 import SingleMovie from "./components/MovieList/SingleMovie";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Join from "./pages/Join";
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
           path="/upcoming"
           element={<MovieList type="upcoming" title="Coming Soon" />}
         />
+        {/* 로그인/회원가입 */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
         {/* 상세페이지 */}
         <Route path="/movie/:movieId" element={<SingleMovie />} />
       </Routes>

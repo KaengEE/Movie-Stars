@@ -4,6 +4,7 @@
   justify-content: space-between;
   padding: 0 30px;
   border-bottom: 1px solid #e6e6e6;
+  margin-top: 20px;
 }
 
 .link {
@@ -13,11 +14,13 @@
 .main_title {
   font-size: 30px;
   color: var(--heading_color);
+  margin-bottom: 20px;
 }
 
 .navbar_links {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .navbar_links > a {
@@ -39,4 +42,19 @@
   width: 25px;
   height: 25px;
   margin-right: 7px;
+}
+
+.user_link {
+  display: flex;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.user_links > a {
+  flex-direction: row;
+  align-items: center;
+  margin-right: 2px;
+  color: var(--body_color);
+  text-decoration: none;
+  padding: 0 5px;
 }
