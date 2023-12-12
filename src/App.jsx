@@ -23,7 +23,7 @@ function App() {
         />
         <Route
           path="/upcoming"
-          element={<MovieList type="upcoming" title="Coming Soon" />}
+          element={<MovieList type="upcoming" title="개봉예정" />}
         />
         {/* 로그인/회원가입 */}
         <Route path="/login" element={<Login />} />
