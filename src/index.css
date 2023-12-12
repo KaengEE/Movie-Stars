@@ -1,7 +1,9 @@
 /* 폰트 */
 @font-face {
-  font-family: "EASTARJET-Medium";
-  src: url(./assets/font/EASTARJET-Medium.otf);
+  font-family: "MBC1961GulimM";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2")
+    format("woff2");
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -17,9 +19,7 @@ html {
 }
 
 body {
-  background-color: var(--body_backgroud);
-  color: var(--body_color);
-  font-family: "EASTARJET-Medium", sans-serif;
+  font-family: "MBC1961GulimM", sans-serif;
 }
 
 /* 공통적으로 자주쓰는 세로가운데정렬 */
