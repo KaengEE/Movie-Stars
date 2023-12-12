@@ -1,0 +1,29 @@
+/* 폰트 */
+@font-face {
+  font-family: "EASTARJET-Medium";
+  src: url(./assets/font/EASTARJET-Medium.otf);
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--body_backgroud);
+  color: var(--body_color);
+  font-family: "EASTARJET-Medium", sans-serif;
+}
+
+/* 공통적으로 자주쓰는 세로가운데정렬 */
+.align_center {
+  display: flex;
+  align-items: center;
+}
