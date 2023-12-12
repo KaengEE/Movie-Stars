@@ -43,15 +43,19 @@ export default function Comment({ movieId }) {
 
   return (
     <div className="comment_card">
-      {comments.map((comment, index) => (
-        <div key={index}>
-          <p>작성자: {comment.username}</p>
-          <p>{comment.comment}</p>
-          <p>별점: {comment.stars}</p>
-          <img src={comment.userProfile} alt="userProfile" />
-          <p>작성일: {comment.createdAt}</p>
-        </div>
-      ))}
+      {comments == null ? (
+        comments.map((comment, index) => (
+          <div key={index}>
+            <p>작성자: {comment.username}</p>
+            <p>{comment.comment}</p>
+            <p>별점: {comment.stars}</p>
+            <img src={comment.userProfile} alt="userProfile" />
+            <p>작성일: {comment.createdAt}</p>
+          </div>
+        ))
+      ) : (
+        <span>평가가 아직 없습니다.</span>
+      )}
     </div>
   );
 }
