@@ -1,7 +1,7 @@
 import {
   collection,
-  getDocs,
   limit,
+  onSnapshot,
   orderBy,
   query,
   where,
@@ -13,32 +13,41 @@ import "./Comment.css";
 export default function Comment({ movieId }) {
   //평가
   const [comments, setComments] = useState([]);
+  //로딩
+  const [loading, setLoading] = useState(true);
 
-  //movieId가 일치하는 컬렉션의 정보를 가져오기
-  const fetchComments = async () => {
-    const q = query(
-      collection(db, "comment"),
-      where("movieId", "==", movieId), //movieId가 같을때
-      orderBy("createdAt", "desc"), //최신순
-      limit(4) //제한
-    );
-    const snapshot = await getDocs(q);
-    const comments = snapshot.docs.map((doc) => {
-      const { comment, createdAt, stars, username, userProfile } = doc.data();
-      return {
-        comment,
-        createdAt: new Date(createdAt).toLocaleDateString("ko-KO"),
-        stars,
-        username,
-        userProfile,
-      };
-    });
-    setComments(comments);
-  };
-
-  //시작할때 가져오기
+  // 실시간 반영
   useEffect(() => {
+    // 이벤트 리스너 해제 함수
+    let unsub;
+
+    const fetchComments = async () => {
+      const q = query(
+        collection(db, "comment"),
+        where("movieId", "==", movieId),
+        orderBy("createdAt", "desc"),
+        limit(4)
+      );
+
+      //실시간 업데이트
+      unsub = onSnapshot(q, (snapshot) => {
+        const comments = snapshot.docs.map((doc) => {
+          const { comment, createdAt, stars, username, userProfile } =
+            doc.data();
+          return {
+            comment,
+            createdAt: new Date(createdAt).toLocaleDateString("ko-KO"),
+            stars,
+            username,
+            userProfile,
+          };
+        });
+        setComments(comments);
+        setLoading(false);
+      });
+    };
     fetchComments();
+    return () => unsub();
   }, []);
 
   //console.log(comments);
