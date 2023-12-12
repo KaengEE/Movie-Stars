@@ -15,6 +15,13 @@ export default function Navbar() {
         <NavLink to="/upcoming">최신순</NavLink>
         <NavLink to="/search">🔎영화검색</NavLink>
       </div>
+
+      <div className="user_links">
+        <Link to="/login">로그인</Link>
+        <Link to="/logout">로그아웃</Link>
+        <Link to="/join">회원가입</Link>
+        <Link to="/mypage">마이페이지</Link>
+      </div>
     </nav>
   );
 }
