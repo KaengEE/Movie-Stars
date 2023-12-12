@@ -1,7 +1,12 @@
 import "./App.css";
+import Navbar from "./components/Layout/Navbar";
 
 function App() {
-  return <>MovieStars 시작</>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 }
 
 export default App;
