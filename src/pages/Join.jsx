@@ -67,7 +67,7 @@ export default function Join() {
   return (
     <>
       <div className="join-container">
-        <h1>Join Movie Stars</h1>
+        <h1>Join Us</h1>
         <form className="join-form" onSubmit={onSubmit}>
           <input
             onChange={onChange}
