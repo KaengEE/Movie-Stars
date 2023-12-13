@@ -93,6 +93,12 @@ export default function Mypage() {
     if (!user) return; //유저가 없으면 return
     if (files && files.length === 1) {
       const file = files[0];
+      //파일크기
+      if (file.size > 1000 * 1000) {
+        alert("이미지 사이즈는 1MB이하로 해주세요");
+        e.target.value = "";
+        return;
+      }
       //이미지 업로드시 참조주소 avatars/유저id
       const locationRef = ref(storage, `avatars/${user?.uid}`);
       //이미지 파일 업로드
