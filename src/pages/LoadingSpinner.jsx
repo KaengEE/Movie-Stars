@@ -1,5 +1,9 @@
 import React from "react";
 
 export default function LoadingSpinner() {
-  return <div>로딩중...</div>;
+  return (
+    <div className="Loading">
+      <img src="/Spinner.gif" alt="로딩중..." />
+    </div>
+  );
 }

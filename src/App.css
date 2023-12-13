@@ -6,3 +6,10 @@
 hr {
   margin: 10px;
 }
+
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
