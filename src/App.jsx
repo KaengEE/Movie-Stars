@@ -6,6 +6,7 @@ import SingleMovie from "./components/MovieList/SingleMovie";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
+import Search from "./components/Search/Search";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           path="/upcoming"
           element={<MovieList type="upcoming" title="개봉예정" />}
         />
+        <Route path="/search" element={<Search />} />
         {/* 로그인/회원가입 */}
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
