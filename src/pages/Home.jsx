@@ -26,8 +26,11 @@ export default function Home() {
     <>
       <h2>최근 평점</h2>
       <h2>추천작</h2>
+      <div className="home-line"></div>
       <MovieListSection title="인기작품" movies={popularMovies} />
+      <div className="home-line"></div>
       <MovieListSection title="개봉예정" movies={upcomingMovies} />
+      <div className="home-line"></div>
       <MovieListSection title="평점순" movies={topRatedMovies} />
     </>
   );
