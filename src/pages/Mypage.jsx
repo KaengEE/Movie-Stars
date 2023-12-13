@@ -7,6 +7,8 @@ import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 // 유저 프로필
 export default function Mypage() {
   const user = auth.currentUser;
+  //로딩
+
   const [comments, setComments] = useState([]);
 
   //유저가 작성한 평가
