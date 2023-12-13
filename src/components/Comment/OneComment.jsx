@@ -93,11 +93,7 @@ export default function OneComment({
         className="modal"
       >
         <h2>Comment 수정</h2>
-        <button
-          onClick={closeModal}
-          onRequestClose={() => setIsModalOpen(false)}
-          className="close"
-        >
+        <button onClick={closeModal} className="close">
           X
         </button>
         <label>

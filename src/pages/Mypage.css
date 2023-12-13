@@ -18,6 +18,14 @@
   width: 800px;
 }
 
+.profile img {
+  border-radius: 100%;
+  overflow: hidden;
+  margin-top: 20px;
+  height: 100px;
+  width: auto;
+}
+
 .my-comments {
   display: flex;
   justify-content: center;
@@ -39,6 +47,34 @@
 .post-card {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+  width: 600px;
+}
+
+.poster {
+  display: flex;
   justify-content: center;
-  width: 800px;
+  text-align: center;
+}
+
+.poster img {
+  width: auto;
+  height: 150px; /* 포스터 높이 조정 */
+  border-radius: 5px; /* 포스터에 둥근 테두리 추가 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 포스터에 그림자 효과 추가 */
+}
+
+.comment-content {
+  margin-left: 20px; /* OneComment와 포스터 간격 조정 */
+}
+
+.modal-profile {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.modal-profile img {
+  border-radius: 100%;
+  overflow: hidden;
 }
