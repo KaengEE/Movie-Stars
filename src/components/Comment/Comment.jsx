@@ -8,17 +8,27 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../../firebase";
+import { db } from "../../firebase";
 import "./Comment.css";
 import OneComment from "./OneComment";
 
 export default function Comment({ movieId }) {
   //평가
   const [comments, setComments] = useState([]);
+  //보여지는 평가
+  const [viewComments, setViewComments] = useState([]);
   //로딩
   const [loading, setLoading] = useState(true);
   //평가개수
-  const [viewComments, setViewComments] = useState(4); // 기본값 4
+  const [viewPage, setViewPage] = useState(null); // 기본값
+
+  //평가 페이지
+  useEffect(() => {
+    if (viewPage !== null) {
+      const newComments = comments.slice(0, (viewPage + 1) * 4);
+      setViewComments(newComments);
+    }
+  }, [viewPage]);
 
   // 실시간 반영
   useEffect(() => {
@@ -29,8 +39,7 @@ export default function Comment({ movieId }) {
       const q = query(
         collection(db, "comment"),
         where("movieId", "==", movieId),
-        orderBy("createdAt", "desc"),
-        limit(viewComments)
+        orderBy("createdAt", "desc")
       );
 
       //실시간 업데이트
@@ -49,28 +58,33 @@ export default function Comment({ movieId }) {
           };
         });
         setComments(comments);
+        setViewPage(0);
         setLoading(false);
       });
     };
     fetchComments();
+
     return () => unsub();
-  }, [viewComments]);
+  }, []);
 
   //console.log(comments);
 
   const showMore = () => {
     //limit 에 +4 하기
-    setViewComments((prev) => prev + 4);
+    setViewPage((prev) => prev + 1);
   };
 
   return (
     <>
-      {comments.map((comment) => (
+      {viewComments.map((comment) => (
         <OneComment key={comment.id} {...comment} />
       ))}
-      <div className="more-btn">
-        <button onClick={showMore}>더보기</button>
-      </div>
+      {/* 페이지 모두 출력시 더보기 버튼 안보임 */}
+      {comments.length / 4 > viewPage + 1 && (
+        <div className="more-btn">
+          <button onClick={showMore}>더보기</button>
+        </div>
+      )}
     </>
   );
 }
