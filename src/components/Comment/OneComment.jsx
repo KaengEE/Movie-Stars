@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth, db } from "../../firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import "./OneComment.css";
+import Modal from "react-modal";
+import StarRatings from "react-star-ratings";
 
 export default function OneComment({
   username,
@@ -14,6 +16,12 @@ export default function OneComment({
 }) {
   //현재유저
   const user = auth.currentUser;
+  //모달창
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  //comment수정
+  const [editComment, setEditComment] = useState(comment);
+  //별점수정
+  const [editStars, setEditStars] = useState(stars);
 
   //삭제
   const delComment = () => {
@@ -26,9 +34,30 @@ export default function OneComment({
       console.log(e);
     }
   };
+  //수정
+  const handleEdit = async () => {
+    //console.log(editComment, editStars);
+    if (!user || user?.uid !== userId) return;
+    try {
+      //db에 업데이트
+      await updateDoc(doc(db, "comment", id), {
+        comment: editComment,
+        stars: editStars,
+      });
+      closeModal(); //창닫기
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-  //모달
-  const openModal = () => {};
+  //창 닫기
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  //창 열기
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="comment_card">
@@ -55,6 +84,42 @@ export default function OneComment({
           ) : null}
         </div>
       )}
+      {/* 모달창(수정창) */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Edit Modal"
+        className="modal"
+      >
+        <h2>Comment 수정</h2>
+        <button
+          onClick={closeModal}
+          onRequestClose={() => setIsModalOpen(false)}
+          className="close"
+        >
+          X
+        </button>
+        <label>
+          평가:
+          <input
+            type="text"
+            value={editComment}
+            onChange={(e) => setEditComment(e.target.value)}
+          />
+        </label>
+        <label>
+          평점: {""}
+          <StarRatings
+            rating={editStars}
+            starRatedColor="orange"
+            changeRating={setEditStars}
+            numberOfStars={5}
+            starDimension="25px" //별 크기
+            name="rating"
+          />
+        </label>
+        <button onClick={handleEdit}>수정</button>
+      </Modal>
     </div>
   );
 }
