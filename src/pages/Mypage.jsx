@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 export default function Mypage() {
   const user = auth.currentUser;
@@ -147,10 +148,12 @@ export default function Mypage() {
             <div className="post-card" key={comment.id}>
               <div className="poster">
                 {comment?.movieId && (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${moviePosters[index]}`}
-                    alt="Movie Poster"
-                  />
+                  <Link to={`/movie/${comment.movieId}`}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${moviePosters[index]}`}
+                      alt="Movie Poster"
+                    />
+                  </Link>
                 )}
               </div>
               <OneComment
