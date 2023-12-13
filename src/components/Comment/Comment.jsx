@@ -1,5 +1,6 @@
 import {
   collection,
+  deleteDoc,
   limit,
   onSnapshot,
   orderBy,
@@ -7,8 +8,9 @@ import {
   where,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import "./Comment.css";
+import OneComment from "./OneComment";
 
 export default function Comment({ movieId }) {
   //평가
@@ -34,7 +36,7 @@ export default function Comment({ movieId }) {
       //실시간 업데이트
       unsub = onSnapshot(q, (snapshot) => {
         const comments = snapshot.docs.map((doc) => {
-          const { comment, createdAt, stars, username, userProfile } =
+          const { comment, createdAt, stars, username, userProfile, userId } =
             doc.data();
           return {
             comment,
@@ -42,6 +44,8 @@ export default function Comment({ movieId }) {
             stars,
             username,
             userProfile,
+            userId,
+            id: doc.id, //문서id
           };
         });
         setComments(comments);
@@ -60,25 +64,13 @@ export default function Comment({ movieId }) {
   };
 
   return (
-    <div className="comment_card">
-      {comments.length === 0 ? (
-        <span>평가가 아직 없습니다.</span>
-      ) : (
-        comments.map((comment, index) => (
-          <div key={index} className="comment_text">
-            <div className="comment_user">
-              <span>작성자: {comment.username}</span>
-              <img src={comment.userProfile} alt="userProfile" />
-            </div>
-            <p>{comment.comment}</p>
-            <div className="text_star">
-              <span>별점: {comment.stars}</span>
-              <span>작성일: {comment.createdAt}</span>
-            </div>
-          </div>
-        ))
-      )}
-      <button onClick={showMore}>더보기</button>
-    </div>
+    <>
+      {comments.map((comment) => (
+        <OneComment key={comment.id} {...comment} />
+      ))}
+      <div className="more-btn">
+        <button onClick={showMore}>더보기</button>
+      </div>
+    </>
   );
 }

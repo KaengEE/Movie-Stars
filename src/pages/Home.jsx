@@ -24,9 +24,11 @@ export default function Home() {
 
   return (
     <>
+      <h2>최근 평점</h2>
+      <h2>추천작</h2>
       <MovieListSection title="인기작품" movies={popularMovies} />
-      <MovieListSection title="평점순" movies={topRatedMovies} />
       <MovieListSection title="개봉예정" movies={upcomingMovies} />
+      <MovieListSection title="평점순" movies={topRatedMovies} />
     </>
   );
 }

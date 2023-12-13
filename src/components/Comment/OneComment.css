@@ -1,0 +1,11 @@
+.delete {
+  padding: 5px 10px;
+  background-color: tomato;
+  margin-top: 10px;
+}
+
+.edit {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: blue;
+}
