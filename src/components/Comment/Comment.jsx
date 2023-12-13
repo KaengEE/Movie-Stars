@@ -44,6 +44,8 @@ export default function Comment({ movieId }) {
 
       //실시간 업데이트
       unsub = onSnapshot(q, (snapshot) => {
+        console.log("Snapshot changes:", snapshot.docChanges());
+
         const comments = snapshot.docs.map((doc) => {
           const { comment, createdAt, stars, username, userProfile, userId } =
             doc.data();

@@ -13,6 +13,7 @@ export default function OneComment({
   comment,
   stars,
   userProfile,
+  movieId,
 }) {
   //현재유저
   const user = auth.currentUser;

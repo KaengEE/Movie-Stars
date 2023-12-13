@@ -4,14 +4,10 @@ import { auth, db } from "../firebase";
 import OneComment from "../components/Comment/OneComment";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 
-// 유저 프로필
 export default function Mypage() {
   const user = auth.currentUser;
-  //로딩
-
   const [comments, setComments] = useState([]);
 
-  //유저가 작성한 평가
   const fetchComments = async () => {
     const q = query(
       collection(db, "comment"),
@@ -43,10 +39,34 @@ export default function Mypage() {
     setComments(comments);
   };
 
-  //시작할때 가져오기
   useEffect(() => {
     fetchComments();
   }, []);
+
+  const [moviePosters, setMoviePosters] = useState([]);
+
+  const fetchMoviePoster = async (movieId) => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${
+        import.meta.env.VITE_MOVIE_API
+      }&language=ko`
+    );
+    const data = await response.json();
+    return data.poster_path;
+  };
+
+  const fetchAllMoviePosters = async () => {
+    const posterPromises = comments.map((comment) =>
+      fetchMoviePoster(comment.movieId)
+    );
+
+    const posters = await Promise.all(posterPromises);
+    setMoviePosters(posters);
+  };
+
+  useEffect(() => {
+    fetchAllMoviePosters();
+  }, [comments]);
 
   return (
     <div className="mypage-container">
@@ -56,10 +76,27 @@ export default function Mypage() {
         <button>프로필 수정</button>
       </div>
       <div className="my-comments">
-        <p>내 평가</p>
-        {comments.map((comment) => (
-          <OneComment key={comment.id} {...comment} />
-        ))}
+        <p>내 평가 목록</p>
+        <div>
+          {comments.map((comment, index) => (
+            <div className="post-card" key={comment.id}>
+              <div className="poster">
+                {console.log(comment.movieId)}
+                {comment?.movieId && (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${moviePosters[index]}`}
+                    alt="Movie Poster"
+                  />
+                )}
+              </div>
+              <OneComment
+                key={comment.id}
+                {...comment}
+                movieId={comment.movieId}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
