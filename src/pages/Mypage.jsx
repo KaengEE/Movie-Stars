@@ -18,10 +18,11 @@ export default function Mypage() {
   //프로필사진
   const [avatar, setAvatar] = useState(user?.photoURL);
 
+  //유저가 작성한 comments 가져오기
   const fetchComments = async () => {
     const q = query(
       collection(db, "comment"),
-      where("userId", "==", user?.uid),
+      where("userId", "==", user?.uid), //uid 같은것만 가져옴
       orderBy("createdAt", "desc")
     );
     const snapshot = await getDocs(q);
@@ -53,8 +54,10 @@ export default function Mypage() {
     fetchComments();
   }, []);
 
+  //영화포스터
   const [moviePosters, setMoviePosters] = useState([]);
 
+  //영화 API 가져오기
   const fetchMoviePoster = async (movieId) => {
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=${
@@ -65,6 +68,7 @@ export default function Mypage() {
     return data.poster_path;
   };
 
+  //영화포스터 가져오기
   const fetchAllMoviePosters = async () => {
     const posterPromises = comments.map((comment) =>
       fetchMoviePoster(comment.movieId)
