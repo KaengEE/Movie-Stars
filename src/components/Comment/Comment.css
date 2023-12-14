@@ -63,3 +63,8 @@
   color: #777;
   font-style: italic;
 }
+
+.average {
+  text-align: end;
+  padding: 0px 10px;
+}

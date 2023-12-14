@@ -21,6 +21,8 @@ export default function Comment({ movieId }) {
   const [loading, setLoading] = useState(true);
   //평가개수
   const [viewPage, setViewPage] = useState(null); // 기본값
+  //평균별점
+  const [averageStar, setAverageStar] = useState(null);
 
   //평가 페이지
   useEffect(() => {
@@ -60,6 +62,17 @@ export default function Comment({ movieId }) {
           };
         });
         setComments(comments);
+
+        // 평균 평점 계산
+        if (comments.length > 0) {
+          const ratings = comments.map((comment) => comment.stars);
+          const totalRatings = ratings.reduce((acc, rating) => acc + rating, 0);
+          const average = totalRatings / ratings.length;
+          setAverageStar(average.toFixed(2));
+        } else {
+          setAverageStar(null);
+        }
+
         if (viewPage === null) {
           setViewPage(0);
         }
@@ -80,6 +93,10 @@ export default function Comment({ movieId }) {
 
   return (
     <>
+      {/* 평균별점 */}
+      <div className="average">
+        {averageStar !== null && <p>평균 평점: {averageStar}점</p>}
+      </div>
       {viewComments.length > 0 ? (
         viewComments.map((comment) => (
           <OneComment key={comment.id} {...comment} />
