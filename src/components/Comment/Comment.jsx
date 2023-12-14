@@ -80,9 +80,15 @@ export default function Comment({ movieId }) {
 
   return (
     <>
-      {viewComments.map((comment) => (
-        <OneComment key={comment.id} {...comment} />
-      ))}
+      {viewComments.length > 0 ? (
+        viewComments.map((comment) => (
+          <OneComment key={comment.id} {...comment} />
+        ))
+      ) : (
+        <div className="noComment">
+          <span>아직 평가가 없습니다!</span>
+        </div>
+      )}
       {/* 페이지 모두 출력시 더보기 버튼 안보임 */}
       {comments.length / 4 > viewPage + 1 && (
         <div className="more-btn">

@@ -57,3 +57,9 @@
 .more-btn button {
   background-color: navy;
 }
+
+.noComment {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}

@@ -4,6 +4,7 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import "./OneComment.css";
 import Modal from "react-modal";
 import StarRatings from "react-star-ratings";
+import Profile from "../../assets/profile.png";
 
 export default function OneComment({
   username,
@@ -66,7 +67,7 @@ export default function OneComment({
         <div className="comment_text">
           <div className="comment_user">
             <span>작성자: {username}</span>
-            <img src={userProfile} alt="userProfile" />
+            <img src={userProfile || Profile} alt="userProfile" />
           </div>
           <p>{comment}</p>
           <div className="text_star">

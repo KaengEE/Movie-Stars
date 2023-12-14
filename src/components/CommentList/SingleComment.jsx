@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./CommentList.css";
+import Profile from "../../assets/profile.png";
 
 export default function SingleComment({
   username,
@@ -16,7 +17,7 @@ export default function SingleComment({
         <div className="comment_text">
           <div className="comment_user">
             <span>작성자: {username}</span>
-            <img src={userProfile} alt="userProfile" />
+            <img src={userProfile || Profile} alt="userProfile" />
           </div>
           <p>{comment}</p>
           <div className="text_star">
