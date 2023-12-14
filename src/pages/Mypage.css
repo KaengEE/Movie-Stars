@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.mypage-title {
+  margin-top: 10px;
+}
+
 .profile {
   display: flex;
   justify-content: center;
@@ -24,6 +28,19 @@
   margin-top: 20px;
   height: 100px;
   width: auto;
+  margin-bottom: 5px;
+}
+
+.profile p {
+  color: black;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.profile button {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  margin-bottom: 20px;
 }
 
 .my-comments {
@@ -37,38 +54,47 @@
   padding: 5px 10px;
   height: auto;
   width: 800px;
+  margin-bottom: 50px;
 }
 
-.comments-box {
-  display: flex;
-  flex-direction: column;
+.my-comments .comment-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  font-weight: 600;
+  border-bottom: 2px double #aaa;
+}
+
+.comment-container {
+  width: auto;
+  padding: 30px 20px;
 }
 
 .post-card {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 10px;
   padding-bottom: 10px;
   width: 600px;
+  margin-bottom: 10px;
 }
 
 .poster {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  margin-top: 10px;
 }
 
 .poster img {
   width: auto;
-  height: 150px; /* 포스터 높이 조정 */
-  border-radius: 5px; /* 포스터에 둥근 테두리 추가 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 포스터에 그림자 효과 추가 */
+  height: 150px;
+  border-radius: 10px;
 }
 
-.comment-content {
-  margin-left: 20px; /* OneComment와 포스터 간격 조정 */
+.comment-box {
+  width: 100%;
 }
 
+/* 모달창 */
 .modal-profile {
   text-align: center;
   margin-bottom: 10px;

@@ -149,14 +149,15 @@ export default function Mypage() {
 
   return (
     <div className="mypage-container">
+      <h1 className="mypage-title">My Page</h1>
       <div className="profile">
         {avatar && <img src={avatar} alt="User Avatar" />}
         {user?.displayName && <p>{user?.displayName}</p>}
         <button onClick={openModal}>프로필 수정</button>
       </div>
       <div className="my-comments">
-        <p>내 평가 목록</p>
-        <div>
+        <p className="comment-title">내 평가 목록</p>
+        <div className="comment-container">
           {comments.map((comment, index) => (
             <div className="post-card" key={comment.id}>
               <div className="poster">
@@ -169,11 +170,13 @@ export default function Mypage() {
                   </Link>
                 )}
               </div>
-              <OneComment
-                key={comment.id}
-                {...comment}
-                movieId={comment.movieId}
-              />
+              <div className="comment-box">
+                <OneComment
+                  key={comment.id}
+                  {...comment}
+                  movieId={comment.movieId}
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -192,7 +195,7 @@ export default function Mypage() {
         <label>
           프로필사진
           <div className="modal-profile">
-            {avatar && <img src={avatar} alt="User Avatar" />}
+            {newAvatar && <img src={newAvatar} alt="User Avatar" />}
           </div>
           <input
             onChange={onAvatarChange}
