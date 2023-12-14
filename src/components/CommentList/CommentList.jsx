@@ -9,6 +9,9 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import SingleComment from "./SingleComment";
 import "./CommentList.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function CommentList() {
   //리스트 목록
@@ -48,18 +51,29 @@ export default function CommentList() {
             id: doc.id, //문서 id
           };
         });
+        console.log(commentList);
         setCommentList(commentList);
       });
     };
     fetchList();
     return () => unsub();
   }, []);
+  // react-slick 설정
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+  };
 
   return (
     <div className="home-comment">
-      {commentList.map((comment) => (
-        <SingleComment key={comment.id} {...comment} />
-      ))}
+      <Slider {...settings}>
+        {commentList.map((comment) => (
+          <SingleComment key={comment.id} {...comment} />
+        ))}
+      </Slider>
     </div>
   );
 }

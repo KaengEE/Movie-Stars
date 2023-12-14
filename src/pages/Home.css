@@ -25,7 +25,7 @@
 
 .home_cards {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 /* 경계선 */
 .home-line {
