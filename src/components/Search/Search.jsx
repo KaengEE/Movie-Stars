@@ -10,6 +10,7 @@ export default function Search() {
 
   async function SearchMovie() {
     //console.log(searchTerm);
+
     setSearch(searchTerm);
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${searchTerm}&api_key=${

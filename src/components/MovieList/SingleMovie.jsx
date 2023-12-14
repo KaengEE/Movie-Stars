@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./SingleMovie.css";
 import Comment from "../Comment/Comment";
 import CommentForm from "../Comment/CommentForm";
+import Poster from "../../assets/sample-Poster.png";
 
 export default function SingleMovie() {
   const { movieId } = useParams();
@@ -44,11 +45,13 @@ export default function SingleMovie() {
           <div className="detail">
             {/* 포스터 */}
             <div className="detail_poster">
-              {details.poster_path && (
+              {details.poster_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${details.poster_path}`}
                   alt=""
                 />
+              ) : (
+                <img src={Poster}></img>
               )}
             </div>
             {/* 상세내용 */}
