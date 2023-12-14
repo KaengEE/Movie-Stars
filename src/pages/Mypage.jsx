@@ -3,7 +3,14 @@ import "./Mypage.css";
 import { auth, db, storage } from "../firebase";
 import OneComment from "../components/Comment/OneComment";
 import Modal from "react-modal";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -18,38 +25,39 @@ export default function Mypage() {
   //프로필사진
   const [avatar, setAvatar] = useState(user?.photoURL);
 
-  //유저가 작성한 comments 가져오기
+  //유저가 작성한 comments 가져오기 => onSnapshot으로 변경
   const fetchComments = async () => {
     const q = query(
       collection(db, "comment"),
       where("userId", "==", user?.uid), //uid 같은것만 가져옴
       orderBy("createdAt", "desc")
     );
-    const snapshot = await getDocs(q);
-    const comments = snapshot.docs.map((doc) => {
-      const {
-        comment,
-        createdAt,
-        userId,
-        username,
-        userProfile,
-        stars,
-        movieId,
-      } = doc.data();
-      return {
-        comment,
-        createdAt: new Date(createdAt).toLocaleDateString("ko-KO"),
-        userId,
-        username,
-        userProfile,
-        stars,
-        movieId,
-        id: doc.id,
-      };
+    const unsub = onSnapshot(q, (snapshot) => {
+      const comments = snapshot.docs.map((doc) => {
+        const {
+          comment,
+          createdAt,
+          userId,
+          username,
+          userProfile,
+          stars,
+          movieId,
+        } = doc.data();
+        return {
+          comment,
+          createdAt: new Date(createdAt).toLocaleDateString("ko-KO"),
+          userId,
+          username,
+          userProfile,
+          stars,
+          movieId,
+          id: doc.id,
+        };
+      });
+      setComments(comments);
     });
-    setComments(comments);
+    return () => unsub();
   };
-
   useEffect(() => {
     fetchComments();
   }, []);
