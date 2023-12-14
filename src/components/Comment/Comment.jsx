@@ -28,7 +28,7 @@ export default function Comment({ movieId }) {
       const newComments = comments.slice(0, (viewPage + 1) * 4);
       setViewComments(newComments);
     }
-  }, [viewPage]);
+  }, [viewPage, comments]); //comments도 업데이트되었을경우 페이지업데이트
 
   // 실시간 반영
   useEffect(() => {
@@ -60,7 +60,9 @@ export default function Comment({ movieId }) {
           };
         });
         setComments(comments);
-        setViewPage(0);
+        if (viewPage === null) {
+          setViewPage(0);
+        }
         setLoading(false);
       });
     };

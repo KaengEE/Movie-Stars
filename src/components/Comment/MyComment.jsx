@@ -23,8 +23,8 @@ export default function MyComment({ userId }) {
         }));
         setComments(commentsData);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching comments:", error);
+      } catch (e) {
+        console.log(e);
       }
     };
     fetchComments();
