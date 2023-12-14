@@ -71,7 +71,6 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              {" "}
               <Link onClick={onLogOut} to="/logout">
                 로그아웃
               </Link>
