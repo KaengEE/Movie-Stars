@@ -25,7 +25,7 @@ export default function CommentList() {
       const q = query(
         collection(db, "comment"),
         orderBy("createdAt", "desc"),
-        limit(8)
+        limit(20)
       );
 
       //실시간
