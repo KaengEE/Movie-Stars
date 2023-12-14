@@ -14,6 +14,7 @@ import {
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 import { Link } from "react-router-dom";
+import Profile from "../assets/profile.png";
 
 export default function Mypage() {
   const user = auth.currentUser;
@@ -23,7 +24,9 @@ export default function Mypage() {
   //수정이름
   const [newName, setNewName] = useState(user.displayName);
   //프로필사진
-  const [avatar, setAvatar] = useState(user?.photoURL);
+  const [avatar, setAvatar] = useState(user?.photoURL || Profile);
+  //새프로필사진
+  const [newAvatar, setNewAvatar] = useState(user?.photoURL || Profile);
 
   //유저가 작성한 comments 가져오기 => onSnapshot으로 변경
   const fetchComments = async () => {
@@ -118,11 +121,7 @@ export default function Mypage() {
       const result = await uploadBytes(locationRef, file);
       //db에 입력할 주소
       const avatarUrl = await getDownloadURL(result.ref);
-      setAvatar(avatarUrl);
-      //인증객체의 user의 프로필 이미지 업데이트
-      await updateProfile(user, {
-        photoURL: avatarUrl,
-      });
+      setNewAvatar(avatarUrl);
     }
   };
 
@@ -136,10 +135,12 @@ export default function Mypage() {
     });
 
     // 새로운 프로필 사진이 선택되었을 경우만 업데이트
-    if (avatar !== user.photoURL) {
+    if (newAvatar !== user.photoURL) {
       await updateProfile(user, {
-        photoURL: avatar,
+        photoURL: newAvatar,
       });
+
+      setAvatar(newAvatar);
     }
 
     // 모달 닫기
