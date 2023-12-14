@@ -14,6 +14,10 @@ export default function Navbar() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  //메뉴 닫기
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
   //로그아웃
   const onLogOut = async () => {
     const ok = confirm("로그아웃 하시겠습니까?");
@@ -21,6 +25,7 @@ export default function Navbar() {
       //로그아웃
       await auth.signOut();
       navigate("/login");
+      setIsMobileMenuOpen(false);
     }
   };
 
@@ -37,18 +42,32 @@ export default function Navbar() {
 
       <div className={`navbar_links ${isMobileMenuOpen ? "active" : ""}`}>
         <div className="links">
-          <NavLink to="/">홈</NavLink>
-          <NavLink to="/popular">인기순</NavLink>
-          <NavLink to="/top_rated">평점순</NavLink>
-          <NavLink to="/upcoming">최신순</NavLink>
-          <NavLink to="/search">🔎영화검색</NavLink>
+          <NavLink to="/" onClick={closeMobileMenu}>
+            홈
+          </NavLink>
+          <NavLink to="/popular" onClick={closeMobileMenu}>
+            인기순
+          </NavLink>
+          <NavLink to="/top_rated" onClick={closeMobileMenu}>
+            평점순
+          </NavLink>
+          <NavLink to="/upcoming" onClick={closeMobileMenu}>
+            최신순
+          </NavLink>
+          <NavLink to="/search" onClick={closeMobileMenu}>
+            🔎영화검색
+          </NavLink>
         </div>
         <div className="user_links">
           {/* 로그인에 따라 보이게 */}
           {!user ? (
             <>
-              <Link to="/login">로그인</Link>
-              <Link to="/join">회원가입</Link>
+              <Link to="/login" onClick={closeMobileMenu}>
+                로그인
+              </Link>
+              <Link to="/join" onClick={closeMobileMenu}>
+                회원가입
+              </Link>
             </>
           ) : (
             <>
@@ -56,7 +75,9 @@ export default function Navbar() {
               <Link onClick={onLogOut} to="/logout">
                 로그아웃
               </Link>
-              <Link to="/mypage">마이페이지</Link>
+              <Link to="/mypage" onClick={closeMobileMenu}>
+                마이페이지
+              </Link>
             </>
           )}
         </div>
