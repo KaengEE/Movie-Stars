@@ -61,10 +61,12 @@ export default function CommentList() {
   // react-slick 설정
   const settings = {
     dots: true,
-    infinite: true,
-    speed: 1000,
+    infinite: true, // 무한
+    autoplay: true, // 자동 재생
+    autoplaySpeed: 4000, // 자동 재생 속도
+    speed: 2000,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
   };
 
   return (

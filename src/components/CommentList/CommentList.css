@@ -11,19 +11,19 @@
 }
 
 .home-comment .comment_text {
-  max-height: 500px;
+  max-height: 200px;
+  width: 300px;
   margin-bottom: 10px;
 }
 
 /* .slick-list */
 .slick-list {
-  height: auto;
-  max-width: 800px;
-  margin: 0 auto; /* 중앙 정렬을 위해 margin을 추가 */
+  width: 900px;
+  height: 150px;
 }
 
-/*  */
+/* slide 박스 */
 .slick-slide {
-  width: 1200px;
+  width: 800px;
   margin-left: 20px;
 }
