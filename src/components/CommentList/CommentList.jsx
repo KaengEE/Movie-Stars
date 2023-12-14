@@ -51,7 +51,7 @@ export default function CommentList() {
             id: doc.id, //문서 id
           };
         });
-        console.log(commentList);
+        //console.log(commentList);
         setCommentList(commentList);
       });
     };
