@@ -4,6 +4,12 @@
   margin-bottom: 5px;
   color: #333;
 }
+
+.youtube_header {
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .home_list_heading {
   font-size: 26px;
   color: #333;

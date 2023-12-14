@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieCard from "../components/MovieList/MovieCard";
 import CommentList from "../components/CommentList/CommentList";
 import "./Home.css";
+import Header from "../components/Layout/YoutubePlayer";
 import YoutubePlayer from "../components/Layout/YoutubePlayer";
 
 export default function Home() {
@@ -27,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <Head title="추천작" />
+      <Head title="이달의 추천작" />
       <div className="home-line"></div>
       <Comments title="Hot Comment" />
       <div className="home-line"></div>
@@ -73,7 +74,7 @@ function Comments({ title }) {
 function Head({ title }) {
   return (
     <section className="home_list">
-      <header className="align_center home_list_header">
+      <header className="align_center youtube_header">
         <h2 className="align_center home_list_header">{title} 💖</h2>
       </header>
       {/* commentList */}
