@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Layout/Navbar";
 import MovieList from "./components/MovieList/MovieList";
@@ -51,6 +51,7 @@ function App() {
             {/* 로그인/회원가입 */}
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />
+            <Route path="/logout" element={<Navigate to="/login" />} />
             {/* 마이페이지 */}
             <Route path="/mypage" element={<Mypage />} />
             {/* 상세페이지 */}
