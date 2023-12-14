@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieCard from "../components/MovieList/MovieCard";
 import CommentList from "../components/CommentList/CommentList";
 import "./Home.css";
+import YoutubePlayer from "../components/Layout/YoutubePlayer";
 
 export default function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -26,9 +27,9 @@ export default function Home() {
 
   return (
     <>
-      <Comments title="Hot Comment" />
+      <Head title="추천작" />
       <div className="home-line"></div>
-      <h2>추천작</h2>
+      <Comments title="Hot Comment" />
       <div className="home-line"></div>
       <MovieListSection title="인기작품" movies={popularMovies} />
       <div className="home-line"></div>
@@ -64,6 +65,20 @@ function Comments({ title }) {
       {/* commentList */}
       <div className="home_cards">
         <CommentList />
+      </div>
+    </section>
+  );
+}
+
+function Head({ title }) {
+  return (
+    <section className="home_list">
+      <header className="align_center home_list_header">
+        <h2 className="align_center home_list_header">{title} 💖</h2>
+      </header>
+      {/* commentList */}
+      <div className="youtube">
+        <YoutubePlayer />
       </div>
     </section>
   );
