@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "../components/MovieList/MovieCard";
+import CommentList from "../components/CommentList/CommentList";
 import "./Home.css";
+
 export default function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -24,7 +26,8 @@ export default function Home() {
 
   return (
     <>
-      <h2>최근 평점</h2>
+      <Comments title="Hot Comment" />
+      <div className="home-line"></div>
       <h2>추천작</h2>
       <div className="home-line"></div>
       <MovieListSection title="인기작품" movies={popularMovies} />
@@ -47,6 +50,20 @@ function MovieListSection({ title, movies }) {
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
+      </div>
+    </section>
+  );
+}
+
+function Comments({ title }) {
+  return (
+    <section className="home_list">
+      <header className="align_center home_list_header">
+        <h2 className="align_center home_list_header">{title} 🔥</h2>
+      </header>
+      {/* commentList */}
+      <div className="home_cards">
+        <CommentList />
       </div>
     </section>
   );
