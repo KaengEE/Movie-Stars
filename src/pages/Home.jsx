@@ -22,16 +22,16 @@ export default function Home() {
       }&language=ko`
     );
     const data = await response.json();
-    setMovies(data.results.slice(0, 5)); // Limiting to the first 5 movies
+    setMovies(data.results.slice(0, 6)); // 홈에 출력할 영화 각각 6개
   }
 
   return (
     <>
       <Head title="이달의 추천작" />
       <div className="home-line"></div>
-      <Comments title="Hot Comment" />
-      <div className="home-line"></div>
       <MovieListSection title="인기작품 🏆" movies={popularMovies} />
+      <div className="home-line"></div>
+      <Comments title="Hot Comment" />
       <div className="home-line"></div>
       <MovieListSection title="개봉예정 ✨" movies={upcomingMovies} />
       <div className="home-line"></div>

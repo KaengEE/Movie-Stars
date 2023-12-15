@@ -49,3 +49,16 @@
   margin: 20px;
   text-align: center;
 }
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .youtube {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  iframe {
+    height: 300px;
+    width: 100%;
+  }
+}
