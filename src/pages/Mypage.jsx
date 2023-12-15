@@ -27,6 +27,8 @@ export default function Mypage() {
   const [avatar, setAvatar] = useState(user?.photoURL || Profile);
   //새프로필사진
   const [newAvatar, setNewAvatar] = useState(user?.photoURL || Profile);
+  //등급
+  const [userGrade, setUserGrade] = useState("");
 
   //유저가 작성한 comments 가져오기 => onSnapshot으로 변경
   const fetchComments = async () => {
@@ -57,6 +59,17 @@ export default function Mypage() {
           id: doc.id,
         };
       });
+
+      // 등급 계산(평점작성개수로 나눔)
+      const grade =
+        comments.length <= 5
+          ? "브론즈 🥉"
+          : comments.length <= 30
+          ? "실버 🥈"
+          : "골드 🥇";
+
+      setUserGrade(grade);
+
       setComments(comments);
     });
     return () => unsub();
@@ -153,6 +166,7 @@ export default function Mypage() {
       <div className="profile">
         {avatar && <img src={avatar} alt="User Avatar" />}
         {user?.displayName && <p>{user?.displayName}</p>}
+        <p className="grade">나의 등급: {userGrade}</p>
         <button onClick={openModal}>프로필 수정</button>
       </div>
       <div className="my-comments">
