@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import "./OneComment.css";
@@ -24,6 +24,8 @@ export default function OneComment({
   const [editComment, setEditComment] = useState(comment);
   //별점수정
   const [editStars, setEditStars] = useState(stars);
+  //유저등급
+  const [grade, setGrade] = useState("🥉"); //초기값 브론즈
 
   //삭제
   const delComment = () => {
@@ -37,6 +39,27 @@ export default function OneComment({
       console.log(e);
     }
   };
+
+  //user의 posts 값 가져오기
+  const postCount = async (userId) => {
+    const postRef = doc(db, "users", userId);
+    const docSnap = await getDoc(postRef);
+    const postData = docSnap.data();
+    const posts = postData ? postData.posts || 0 : 0;
+
+    // posts 값에 따라 등급 매기기
+    if (posts >= 0 && posts <= 5) {
+      setGrade("🥉");
+    } else if (posts >= 6 && posts <= 20) {
+      setGrade("🥈");
+    } else {
+      setGrade("🥇");
+    }
+  };
+
+  useEffect(() => {
+    postCount(userId);
+  }, []);
 
   // post 개수 삭제 메서드
   const decrementPostCount = async (userId) => {
@@ -84,6 +107,8 @@ export default function OneComment({
         <div className="comment_text">
           <div className="comment_user">
             <span>작성자: {username}</span>
+            {/* 등급 표시 */}
+            <span>{grade}</span>
             <img src={userProfile || Profile} alt="userProfile" />
           </div>
           <p>{comment}</p>

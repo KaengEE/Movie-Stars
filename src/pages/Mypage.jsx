@@ -5,6 +5,8 @@ import OneComment from "../components/Comment/OneComment";
 import Modal from "react-modal";
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   onSnapshot,
   orderBy,
@@ -27,8 +29,8 @@ export default function Mypage() {
   const [avatar, setAvatar] = useState(user?.photoURL || Profile);
   //새프로필사진
   const [newAvatar, setNewAvatar] = useState(user?.photoURL || Profile);
-  //등급
-  const [userGrade, setUserGrade] = useState("");
+  //유저등급
+  const [grade, setGrade] = useState("🥉"); //초기값 브론즈
 
   //유저가 작성한 comments 가져오기 => onSnapshot으로 변경
   const fetchComments = async () => {
@@ -60,21 +62,31 @@ export default function Mypage() {
         };
       });
 
-      // 등급 계산(평점작성개수로 나눔)
-      const grade =
-        comments.length <= 5
-          ? "브론즈 🥉"
-          : comments.length <= 30
-          ? "실버 🥈"
-          : "골드 🥇";
-
-      setUserGrade(grade);
-
       setComments(comments);
     });
     return () => unsub();
   };
+
+  //user의 posts 값 가져오기
+  const postCount = async (userId) => {
+    const postRef = doc(db, "users", userId);
+    const docSnap = await getDoc(postRef);
+    const postData = docSnap.data();
+    const posts = postData ? postData.posts || 0 : 0;
+    //console.log(posts);
+
+    // posts 값에 따라 등급 매기기
+    if (posts >= 0 && posts <= 5) {
+      setGrade("🥉");
+    } else if (posts >= 6 && posts <= 20) {
+      setGrade("🥈");
+    } else {
+      setGrade("🥇");
+    }
+  };
+
   useEffect(() => {
+    postCount(user.uid);
     fetchComments();
   }, []);
 
@@ -167,7 +179,7 @@ export default function Mypage() {
         {avatar && <img src={avatar} alt="User Avatar" />}
         <div className="profile-text">
           {user?.displayName && <p>{user?.displayName}</p>}
-          <p className="grade">나의 등급: {userGrade}</p>
+          <p className="grade">나의 등급: {grade}</p>
           <button onClick={openModal}>프로필 수정</button>
         </div>
       </div>
