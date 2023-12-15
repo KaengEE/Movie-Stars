@@ -13,7 +13,7 @@ export default function SingleComment({
 }) {
   return (
     <Link to={`/movie/${movieId}`} style={{ textDecoration: "none" }}>
-      <div>
+      <div className="comment_box_slider">
         <div className="comment_text">
           <div className="comment_user">
             <span>작성자: {username}</span>

@@ -1,5 +1,6 @@
 .home-comment {
   display: flex;
+  justify-content: center;
   margin-left: 100px;
 }
 
@@ -18,12 +19,15 @@
 
 /* .slick-list */
 .slick-list {
-  width: 900px;
-  height: 150px;
+  width: 1200px;
+  height: 200px;
+  background-color: #f0f9ff;
+}
+.slick-slide {
+  padding: 30px;
 }
 
-/* slide 박스 */
-.slick-slide {
-  width: 800px;
-  margin-left: 20px;
+.slick-list .comment_box_slider {
+  background-color: #f0f9ff;
+  padding: 10px 20px;
 }

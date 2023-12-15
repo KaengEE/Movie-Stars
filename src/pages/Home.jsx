@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import MovieCard from "../components/MovieList/MovieCard";
 import CommentList from "../components/CommentList/CommentList";
 import "./Home.css";
-import Header from "../components/Layout/YoutubePlayer";
 import YoutubePlayer from "../components/Layout/YoutubePlayer";
 
 export default function Home() {
