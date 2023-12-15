@@ -1,6 +1,6 @@
 .home_list_header {
   padding: 10px 30px;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 5px;
   color: #333;
 }
@@ -8,6 +8,7 @@
 .youtube_header {
   justify-content: center;
   margin-top: 10px;
+  color: #333;
 }
 
 .home_list_heading {

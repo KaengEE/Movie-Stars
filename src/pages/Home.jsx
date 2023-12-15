@@ -31,11 +31,11 @@ export default function Home() {
       <div className="home-line"></div>
       <Comments title="Hot Comment" />
       <div className="home-line"></div>
-      <MovieListSection title="인기작품" movies={popularMovies} />
+      <MovieListSection title="인기작품 🏆" movies={popularMovies} />
       <div className="home-line"></div>
-      <MovieListSection title="개봉예정" movies={upcomingMovies} />
+      <MovieListSection title="개봉예정 ✨" movies={upcomingMovies} />
       <div className="home-line"></div>
-      <MovieListSection title="평점순" movies={topRatedMovies} />
+      <MovieListSection title="평점순 👑" movies={topRatedMovies} />
     </>
   );
 }
