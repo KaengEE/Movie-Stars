@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth, db } from "../../firebase";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import "./OneComment.css";
 import Modal from "react-modal";
 import StarRatings from "react-star-ratings";
@@ -32,10 +32,27 @@ export default function OneComment({
     try {
       //db에 삭제
       deleteDoc(doc(db, "comment", id)); //문서아이디같은 코멘트 삭제
+      decrementPostCount(user.uid); // posts 개수 감소
     } catch (e) {
       console.log(e);
     }
   };
+
+  // post 개수 삭제 메서드
+  const decrementPostCount = async (userId) => {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef); //getDoc
+
+    //기존의 값 가져오기
+    const postData = docSnap.data();
+    const postCount = postData.posts || 0;
+    //console.log(postCount);
+    //업데이트
+    await updateDoc(docRef, {
+      posts: postCount - 1,
+    });
+  };
+
   //수정
   const handleEdit = async () => {
     //console.log(editComment, editStars);
