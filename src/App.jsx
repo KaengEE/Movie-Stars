@@ -11,6 +11,7 @@ import Mypage from "./pages/Mypage";
 import { useEffect, useState } from "react";
 import { auth } from "./firebase";
 import LoadingSpinner from "./pages/LoadingSpinner";
+import Footer from "./components/Layout/Footer";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -57,6 +58,7 @@ function App() {
             {/* 상세페이지 */}
             <Route path="/movie/:movieId" element={<SingleMovie />} />
           </Routes>
+          <Footer />
         </>
       )}
     </div>
