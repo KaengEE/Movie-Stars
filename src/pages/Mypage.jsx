@@ -165,9 +165,11 @@ export default function Mypage() {
       <h1 className="mypage-title">My Page</h1>
       <div className="profile">
         {avatar && <img src={avatar} alt="User Avatar" />}
-        {user?.displayName && <p>{user?.displayName}</p>}
-        <p className="grade">나의 등급: {userGrade}</p>
-        <button onClick={openModal}>프로필 수정</button>
+        <div className="profile-text">
+          {user?.displayName && <p>{user?.displayName}</p>}
+          <p className="grade">나의 등급: {userGrade}</p>
+          <button onClick={openModal}>프로필 수정</button>
+        </div>
       </div>
       <div className="my-comments">
         <p className="comment-title">내 평가 목록</p>

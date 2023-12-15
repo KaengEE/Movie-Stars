@@ -110,3 +110,52 @@
   height: 100px;
   width: auto;
 }
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .profile {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    height: auto;
+  }
+
+  .profile-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 50px;
+  }
+
+  .my-comments {
+    width: 400px;
+  }
+
+  .my-comments .comment-container {
+    width: 300px;
+    height: auto;
+    padding: 0px;
+  }
+
+  .my-comments .post-card {
+    flex-direction: column;
+  }
+
+  .my-comments .post-card {
+    width: 300px;
+    margin-right: 10px;
+  }
+
+  .my-comments .poster {
+    margin: 0px;
+    width: 300px;
+    text-align: center;
+  }
+
+  .my-comments .comment-box {
+    width: 300px;
+    height: auto;
+  }
+}
