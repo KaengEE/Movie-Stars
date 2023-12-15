@@ -5,9 +5,13 @@ import { auth, db } from "../../firebase";
 import {
   addDoc,
   collection,
+  doc,
+  getDoc,
   getDocs,
   limit,
   query,
+  setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +66,7 @@ export default function CommentForm({ movieId }) {
       }
 
       //comment 저장
-      const doc = await addDoc(collection(db, "comment"), {
+      await addDoc(collection(db, "comment"), {
         comment: comment,
         createdAt: Date.now(),
         username: user.displayName || 이름없음,
@@ -72,6 +76,11 @@ export default function CommentForm({ movieId }) {
         userProfile: user.photoURL || "",
       });
       //console.log(doc);
+
+      //글작성수증가
+      await incrementPostCount(user.uid);
+      //console.log("증가합니다.");
+
       //초기화
       setComment("");
       setStars(0);
@@ -79,6 +88,26 @@ export default function CommentForm({ movieId }) {
       console.log(e);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // post 개수 증가 메서드
+  const incrementPostCount = async (userId) => {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef); //getDoc
+
+    if (docSnap.exists()) {
+      //기존의 값 가져오기
+      const postData = docSnap.data();
+      const postCount = postData.posts || 0;
+      //console.log(postCount);
+      //업데이트
+      await updateDoc(docRef, {
+        posts: postCount + 1,
+      });
+    } else {
+      // 새로 생성
+      await setDoc(docRef, { posts: 1 });
     }
   };
 
