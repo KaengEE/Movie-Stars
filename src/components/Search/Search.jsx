@@ -52,7 +52,7 @@ export default function Search() {
         className="search"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
         placeholder="영화검색..."
       />
       <button onClick={SearchMovie}>검색</button>
