@@ -36,6 +36,10 @@
   font-size: 1.2rem;
 }
 
+.profile-text p {
+  text-align: center;
+}
+
 .profile .grade {
   font-size: 0.8rem;
   margin-bottom: 10px;
