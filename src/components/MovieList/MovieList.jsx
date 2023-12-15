@@ -2,26 +2,31 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import "./MovieList.css";
 import _ from "lodash";
+import ReactPaginate from "react-paginate";
 
 export default function MovieList({ type, title }) {
   const [movies, setMovies] = useState([]);
+  //정렬
   const [filterMovies, setFilterMovies] = useState([]);
   const [sort, setSort] = useState({
     by: "default",
     order: "asc",
   });
+  //페이지
+  const [page, setPage] = useState(1); //기본페이지 1
 
   // 영화 API
   async function fetchMovies() {
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/${type}?api_key=${
         import.meta.env.VITE_MOVIE_API
-      }&language=ko`
+      }&language=ko&page=${page}`
     );
     const data = await response.json();
     setMovies(data.results);
     setFilterMovies(data.results);
-    console.log(data.results);
+    //console.log(data.results);
+    console.log(page);
   }
 
   // 정렬 함수
@@ -44,7 +49,13 @@ export default function MovieList({ type, title }) {
   // 영화 로드
   useEffect(() => {
     fetchMovies();
-  }, [type]);
+  }, [type, page]);
+
+  //페이지 클릭시
+  const handlePageClick = (data) => {
+    const selectedPage = data.selected + 1;
+    setPage(selectedPage);
+  };
 
   return (
     <section className="movie_list" id={`${type}`}>
@@ -77,6 +88,22 @@ export default function MovieList({ type, title }) {
         {filterMovies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
+      </div>
+      <div className="page">
+        {/* 페이지네이션 */}
+        <ReactPaginate
+          previousLabel={"<"}
+          nextLabel={">"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={20}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
       </div>
     </section>
   );
