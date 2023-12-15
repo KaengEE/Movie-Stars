@@ -8,7 +8,7 @@ export default function YoutubePlayer() {
       <YouTube
         videoId="-AZ7cnwn2YI"
         opts={{
-          width: "100%",
+          width: "80%",
           height: "400",
           playerVars: {
             autoplay: 1, //자동재생 O

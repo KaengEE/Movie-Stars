@@ -64,3 +64,11 @@
   font-style: italic;
   color: #ddd;
 }
+
+/* 모바일 */
+@media (max-width: 767px) {
+  .movie_card {
+    width: 100px;
+    height: auto;
+  }
+}
