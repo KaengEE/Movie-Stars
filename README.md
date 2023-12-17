@@ -20,7 +20,7 @@ firebase와 영화API DB를 활용하여 제작한 프로젝트입니다.
 
 ## 배포링크
 
-<a href="#">Movie Stars</a>
+<a href="https://movie-stars-kaengee.netlify.app/">Movie Stars</a>
 
 ## 포트폴리오
 
