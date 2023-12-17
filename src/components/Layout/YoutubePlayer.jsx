@@ -10,7 +10,7 @@ export default function YoutubePlayer() {
         opts={{
           width: "80%",
           height: "400",
-          origin: "http://localhost:5173", //cors 에러방지
+          origin: "https://movie-stars-kaengee.netlify.app", //cors 에러방지
           playerVars: {
             autoplay: 1, //자동재생 O
             mute: 1, //음소거
