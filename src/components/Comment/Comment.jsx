@@ -66,8 +66,11 @@ export default function Comment({ movieId }) {
         // 평균 평점 계산
         if (comments.length > 0) {
           const ratings = comments.map((comment) => comment.stars);
+          //reduce 하나의 결과값을 누적하는 배열메소드(배열을 단일값으로 축소)
           const totalRatings = ratings.reduce((acc, rating) => acc + rating, 0);
+          //평균값
           const average = totalRatings / ratings.length;
+          //소수점 2자리 자르기
           setAverageStar(average.toFixed(2));
         } else {
           setAverageStar(null);
