@@ -5,6 +5,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import GoogleButton from "../components/User/GoogleButton";
 import GithubButton from "../components/User/GithubButton";
+import { errorMessageToKorean } from "../components/User/auth-components";
+import { FirebaseError } from "firebase/app";
 
 export default function Login() {
   const [isLoading, setLoading] = useState(false);
@@ -38,9 +40,8 @@ export default function Login() {
       //홈으로
       navigate("/");
     } catch (e) {
-      if (e) {
-        console.log(e.code);
-        setError(e);
+      if (e instanceof FirebaseError) {
+        setError(errorMessageToKorean(e));
       }
     } finally {
       setLoading(false);
@@ -69,9 +70,9 @@ export default function Login() {
             required
           />
           <input type="submit" value={isLoading ? "Loading..." : "Login"} />
-          <p>{error && error.message}</p>
+          <p>{error}</p>
         </form>
-        <p>
+        <p className="error">
           계정이 없으신가요? <Link to="/join">회원가입 →</Link>
         </p>
       </div>

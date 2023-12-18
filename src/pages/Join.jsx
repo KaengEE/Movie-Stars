@@ -5,6 +5,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import GoogleButton from "../components/User/GoogleButton";
 import GithubButton from "../components/User/GithubButton";
+import { errorMessageToKorean } from "../components/User/auth-components";
+import { FirebaseError } from "firebase/app";
 
 export default function Join() {
   const [isLoading, setLoading] = useState(false);
@@ -56,7 +58,10 @@ export default function Join() {
       navigate("/");
     } catch (e) {
       // 에러발생시
-      setError(e);
+      if (e instanceof FirebaseError) {
+        //console.log(e.code);
+        setError(errorMessageToKorean(e));
+      }
     } finally {
       setLoading(false);
     }
@@ -94,7 +99,7 @@ export default function Join() {
             type="submit"
             value={isLoading ? "Loading..." : "Create Account"}
           />
-          <p>{error && error.message}</p>
+          <p className="error">{error}</p>
         </form>
         <p>
           이미 계정이 있습니까? <Link to="/login">로그인 →</Link>
