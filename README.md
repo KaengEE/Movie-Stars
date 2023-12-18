@@ -24,4 +24,4 @@ firebase와 영화API DB를 활용하여 제작한 프로젝트입니다.
 
 ## 포트폴리오
 
-<a href="#">포트폴리오</a>
+<a href="https://drive.google.com/file/d/1tRVdf7ROyBIXOmpmJ2GUeUZ73rglg9QB/view?usp=sharing">포트폴리오</a>
