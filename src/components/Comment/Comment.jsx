@@ -90,7 +90,7 @@ export default function Comment({ movieId }) {
   //console.log(comments);
 
   const showMore = () => {
-    //limit 에 +4 하기
+    //이전 page +1 하기
     setViewPage((prev) => prev + 1);
   };
 

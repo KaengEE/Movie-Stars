@@ -130,7 +130,7 @@ export default function Mypage() {
   //프로필사진수정
   const onAvatarChange = async (e) => {
     const { files } = e.target; //입력한 파일
-    console.log(files);
+    //console.log(files);
     if (!user) return; //유저가 없으면 return
     if (files && files.length === 1) {
       const file = files[0];

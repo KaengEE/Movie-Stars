@@ -26,7 +26,7 @@ export default function MovieList({ type, title }) {
     setMovies(data.results);
     setFilterMovies(data.results);
     //console.log(data.results);
-    console.log(page);
+    //console.log(page);
   }
 
   // 정렬 함수
