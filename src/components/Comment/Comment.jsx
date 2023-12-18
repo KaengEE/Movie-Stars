@@ -17,8 +17,6 @@ export default function Comment({ movieId }) {
   const [comments, setComments] = useState([]);
   //보여지는 평가
   const [viewComments, setViewComments] = useState([]);
-  //로딩
-  const [loading, setLoading] = useState(true);
   //평가개수
   const [viewPage, setViewPage] = useState(null); // 기본값
   //평균별점
@@ -79,7 +77,6 @@ export default function Comment({ movieId }) {
         if (viewPage === null) {
           setViewPage(0);
         }
-        setLoading(false);
       });
     };
     fetchComments();
