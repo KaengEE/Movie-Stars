@@ -56,10 +56,7 @@ export default function Join() {
       navigate("/");
     } catch (e) {
       // 에러발생시
-      if (e instanceof FirebaseError) {
-        //console.log(e.code);
-        setError(errorMessageToKorean(e));
-      }
+      setError(e);
     } finally {
       setLoading(false);
     }
@@ -97,7 +94,7 @@ export default function Join() {
             type="submit"
             value={isLoading ? "Loading..." : "Create Account"}
           />
-          <p>{error}</p>
+          <p>{error && error.message}</p>
         </form>
         <p>
           이미 계정이 있습니까? <Link to="/login">로그인 →</Link>
