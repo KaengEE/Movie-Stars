@@ -70,9 +70,9 @@ export default function Login() {
             required
           />
           <input type="submit" value={isLoading ? "Loading..." : "Login"} />
-          <p>{error}</p>
+          <p className="error">{error}</p>
         </form>
-        <p className="error">
+        <p>
           계정이 없으신가요? <Link to="/join">회원가입 →</Link>
         </p>
       </div>
