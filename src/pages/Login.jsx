@@ -10,7 +10,6 @@ import { FirebaseError } from "firebase/app";
 
 export default function Login() {
   const [isLoading, setLoading] = useState(false);
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -19,9 +18,7 @@ export default function Login() {
   // 입력시
   const onChange = (e) => {
     const { name, value } = e.target;
-    if (name === "name") {
-      setName(value);
-    } else if (name === "email") {
+    if (name === "email") {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
