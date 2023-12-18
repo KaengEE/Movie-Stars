@@ -23,7 +23,10 @@ export default function Footer() {
           </a>
         </div>
         <div className="btn">
-          <a href="" target="_blank">
+          <a
+            href="https://drive.google.com/file/d/1tRVdf7ROyBIXOmpmJ2GUeUZ73rglg9QB/view?usp=sharing"
+            target="_blank"
+          >
             포트폴리오
           </a>
         </div>
