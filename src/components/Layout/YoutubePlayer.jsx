@@ -6,7 +6,7 @@ export default function YoutubePlayer() {
   return (
     <>
       <YouTube
-        videoId="-AZ7cnwn2YI"
+        videoId="-NXHOhQOCB6g"
         opts={{
           width: "80%",
           height: "400",
